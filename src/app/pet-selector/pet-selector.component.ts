@@ -33,7 +33,13 @@ export class PetSelectorComponent implements OnInit, ControlValueAccessor {
 
   registerOnTouched(fn) { }
   registerOnChange(fn) { this.onChange = fn }
-  writeValue(value: any) { }
+  writeValue(selectedIds: number[]) {
+    this.dataSource.data.forEach(row => {
+      // if the row's id is in the selectedIds, select it, otherwise deselect it
+      selectedIds.includes(row.id) ? this.selection.select(row) : this.selection.deselect(row);
+    });
+
+  }
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -55,7 +61,9 @@ export class PetSelectorComponent implements OnInit, ControlValueAccessor {
   }
 
   sendSelectedIds() {
-    this.onChange(this.selection.selected.map(pet => pet.id));
+    if (this.onChange) {
+      this.onChange(this.selection.selected.map(pet => pet.id));
+    }
   }
 
 }

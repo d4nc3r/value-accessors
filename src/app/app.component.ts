@@ -21,7 +21,7 @@ export class AppComponent {
   ngOnInit() {
     this.firstFormGroup = new FormGroup({
       // validator will be custom, we need a non-empty array at the end
-      selectedPets: new FormControl([])
+      selectedPets: new FormControl([1, 3])
     });
     this.secondFormGroup = new FormGroup({
       color: new FormControl('', Validators.required)
@@ -31,8 +31,5 @@ export class AppComponent {
       secondStep: this.secondFormGroup
     });
   }
-
-
-
 
 }
