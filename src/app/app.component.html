@@ -1,35 +1,24 @@
 <mat-horizontal-stepper linear #stepper>
   <mat-step [stepControl]="firstFormGroup" [formGroup]="firstFormGroup">
     <pet-selector formControlName="selectedPets" [pets]="pets"></pet-selector>
+    <mat-error *ngIf="firstFormGroup.controls.selectedPets.invalid">At least one pet must be selected.</mat-error>
     <button mat-raised-button color="primary" matStepperNext>Next</button>
-    <!-- <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="name" placeholder="Last name, First name" required>
-      </mat-form-field>
-    </form> -->
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out preferences</ng-template>
-      <mat-form-field>
-        <mat-label>What's your favorite color?</mat-label>
-        <mat-select formControlName="color">
-          <mat-option class="upper-case" *ngFor="let color of colors" [value]="color">{{color}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div>
-        <button mat-raised-button matStepperPrevious>Back</button>
-        <button mat-raised-button color="primary" matStepperNext>Next</button>
-      </div>
-    </form>
+  <mat-step [stepControl]="secondFormGroup" [formGroup]="secondFormGroup">
+    <ng-template matStepLabel>Fill out pet info</ng-template>
+    <pet-data formControlName="petData" [pets]="pets" [selectedPetIds]="selectedPets.value"></pet-data>
+    <div>
+      <button mat-raised-button matStepperPrevious>Back</button>
+      <button mat-raised-button color="primary" matStepperNext>Next</button>
+    </div>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     <p>You are now done.</p>
     <div>
       <button mat-raised-button matStepperPrevious>Back</button>
+      <!-- stepper.reset will call reset on the individual form controls, which sets the value to null -->
+      <!-- https://angular.io/api/forms/FormControl#reset -->
       <button mat-raised-button color="warn" (click)="stepper.reset()">Reset</button>
     </div>
   </mat-step>

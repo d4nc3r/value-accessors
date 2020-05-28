@@ -33,6 +33,12 @@ export class PetSelectorComponent implements OnInit, ControlValueAccessor {
 
   registerOnTouched(fn) { }
   registerOnChange(fn) { this.onChange = fn }
+
+  /*
+   * this will get called anytime the FormControl value changes outside of this component,
+   * for example, if there is an initial value when the controls is created, the control gets reset, 
+   * or if setValue/patchValue gets called  
+   */
   writeValue(selectedIds: number[]) {
     this.dataSource.data.forEach(row => {
       // if the row's id is in the selectedIds, select it, otherwise deselect it

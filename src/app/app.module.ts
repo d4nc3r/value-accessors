@@ -7,11 +7,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { PetSelectorComponent } from './pet-selector/pet-selector.component';
+import { PetDataComponent } from './pet-data/pet-data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PetSelectorComponent
+    PetSelectorComponent,
+    PetDataComponent
   ],
   imports: [
     BrowserModule,
