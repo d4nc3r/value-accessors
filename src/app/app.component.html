@@ -1,12 +1,10 @@
 <mat-horizontal-stepper linear #stepper>
   <mat-step [stepControl]="firstFormGroup" [formGroup]="firstFormGroup">
-    <pet-selector formControlName="selectedPets" [pets]="pets"></pet-selector>
-    <mat-error *ngIf="firstFormGroup.controls.selectedPets.invalid">At least one pet must be selected.</mat-error>
+    <ng-template matStepLabel>Select pets</ng-template>
     <button mat-raised-button color="primary" matStepperNext>Next</button>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup" [formGroup]="secondFormGroup">
     <ng-template matStepLabel>Fill out pet info</ng-template>
-    <pet-data formControlName="petData" [pets]="pets" [selectedPetIds]="selectedPets.value"></pet-data>
     <div>
       <button mat-raised-button matStepperPrevious>Back</button>
       <button mat-raised-button color="primary" matStepperNext>Next</button>
